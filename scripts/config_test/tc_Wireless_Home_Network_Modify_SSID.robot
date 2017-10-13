@@ -1,9 +1,12 @@
 *** Settings ***
-Resource   keyword/Common.robot
-Resource   keyword/kw_Main_Menu.robot
+Resource   ../../keyword/kw_Common.robot
+Resource   ../../keyword/kw_Main_Menu.robot
+Resource   ../../keyword/Networking/kw_Wireless.robot
 
-Test Setup   Common.Start Test
-Test Teardown  Common.End Test
+
+
+Test Setup   kw_Common.Login Web GUI
+Test Teardown  kw_Common.End Test
 Force Tags  @AUTHOR=Gemtek_Johnny_Peng
 *** Variables ***
 ${Config_Name} =    johnny created dhcp config
@@ -22,10 +25,20 @@ tc_Wireless_Home_Network_Modify_SSID
     Modify ssid
     Verify ssid has been changed
     Restore ssid to previous state
+
+
 *** Keywords ***
 Go to wireless home network page
-    Front_Page.Head to Configure DropAP
-    Main_Menu.Open Newworking Wireless Page
+    kw_Main_Menu.Open Newworking Wireless Page
 
+Modify ssid
+    kw_Wireless.Backup Previous SSID Value
+    kw_Wireless.Set SSID Value      SSID_SET_TEST_1
+
+Verify ssid has been changed
+    kw_Wireless.Should SSID Value Be Equal      SSID_SET_TEST_1
+
+Restore ssid to previous state
+    kw_Wireless.Restore To Previous SSID Value
 
 *** comment ***

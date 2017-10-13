@@ -1,52 +1,47 @@
 global:
-  g_844fb_gui_url: http://192.168.66.1
-  g_844fb_gui_user: support
-  g_844fb_gui_pwd: support
-  g_844fb_Firmware_image: /home/vagrant/CALIX_844F_12-2-1-45.bin    #Used normal Calix image.
-  g_844fb_Firmware_downgrade_image: /home/vagrant/CALIX_844F(12.2.1.13).bin   #Used downgrade Calix image.
-  g_844fb_Dummy_Firmware_image: /home/vagrant/Dummy_CALIX_844F_12.1.0.92.bin    #Used XVI32U Software to remove half program of the normal Calix image.
-  g_844fb_ConfigFile: /home/vagrant/Downloads/backupsettings.conf
-  g_844fb_2_4g_ssid_name: CXNK-calix-2.4G-reg
-  g_844fb_5g_ssid_name: CXNK-calix-5G-reg
-  g_844fb_dut_gw: 192.168.1.1
-  g_844fb_dut_ip_mask: 255.255.255.0
-  g_844fb_pppoe_username: test    #PPPoE username
-  g_844fb_pppoe_password: test    #PPPoE password
-  g_844fb_dummy_pppoe_username: test1
-  g_844fb_dummy_pppoe_password: error
-  g_844fb_Default_ssid: CXNK0038E813
-  g_844fb_2_4g_ssid_name_2: 2.4GHz_Guest0038E813-reg
-  g_844fb_2_4g_ssid_name_3: 2.4GHz_Operator_1-reg
-  g_844fb_2_4g_ssid_name_4: 2.4GHz_Operator_2-reg
-  g_844fb_5g_ssid_name_2: 5GHz_Guest0038E813-reg
-  g_844fb_5g_ssid_name_3: 5GHz_IPTV_SSID0038E813-reg
-  g_844fb_5g_ssid_name_4: 5GHz_Operator_1-reg
-  g_844fb_2_4g_ssid_name_default_2: 2.4GHz_Guest0038E813
-  g_844fb_2_4g_ssid_name_default_3: 2.4GHz_Operator_1
-  g_844fb_2_4g_ssid_name_default_4: 2.4GHz_Operator_2
-  g_844fb_5g_ssid_name_default_2: 5GHz_Guest0038E813
-  g_844fb_5g_ssid_name_default_3: 5GHz_IPTV_SSID0038E813
-  g_844fb_5g_ssid_name_default_4: 5GHz_Operator_1
-  #g_844fb_WANHost_IPv6IP: 2222::7cec:22cd:3f65:7778
-  g_844fb_WANHost_IPv6IP: 2001::100
-  g_844fb_LinkLocal_IPv6IP: fe80::ee4f:82ff:fecc:ec56
-  g_844fb_IPv6IP_GW: 2222::1
-  g_844fb_IPv6IP: fe80::ee4f:82ff:fecc:ec56 
-  g_844fb_LANHost_IPv6IP: 4444::7cec:22cd:3f65:7778
-  g_844fb_GUA: 2222::7cec:22cd:3f65:7777
-  g_844fb_PrefixLength: 64
-  g_844fb_GRP: 4444::/62
-  g_844fb_ValidLifeTime: 2592000
-  g_844fb_PreferredLifeTime: 604800
-  g_844fb_IPv6PrimaryDNS: 2222::250
-  g_844fb_DUT_WAN_Prefix: 2222
-  g_844fb_LAN_host_Prefix: 4444
-  g_844fb_DUT_WAN_Network_Segment_Get_From_DHCPv4: 172.18.19
-  device_IPv4_IP: 172.18.19.1
-  g_844fb_Home_page_url: http://192.168.1.1/#
-  g_844fb_Help_page_url: http://192.168.1.1/html/help/help.html
-  g_844fb_DUT_Model: 844FB-1
-  g_844fb_DUT_Serial Number: 341704000033
-  g_844fb_DUT_FSAN Number: CXNK0038E813
-  g_844fb_DUT_Release: 12.2.1.45
-  g_844fb_DUT_Mac Address: cc:be:59:18:25:17
+  g_input_enter: "\r"
+  g_input_ctrl_c: "\x03"
+  g_input_ctrl_d: "\x04"
+
+  #----------n/s/h/s/tg vlan parameters here-----------
+  g_n2_dpu_data_vlan: 1100
+  g_n2_us_vlan: 1100
+  g_n1_dpu_data_vlan: 1104
+  g_n1_dpu_video_vlan: 1154
+  g_n1_us_vlan: 1104
+
+
+  g_h1_eth2_vlan: 75
+  #----------------------------------------------------
+
+  g_mgmt_vlan: 899
+
+  g_ip_format: \d+\.\d+\.\d+\.\d+
+  g_version_format: \d+\.\d+\.\d+\.\d+
+  g_HWaddr_format: '[A-F0-9]{2}(:[A-F0-9]{2}){5}'
+
+  g_dut_gui_url: http://192.168.66.1
+  g_dut_gui_user: sigmu
+  g_dut_gui_pwd: secom
+  g_dut_sn: CXNKEC4F827E7352
+  g_dut_wait_time: 840
+  
+  g_dut_gw: 192.168.55.1
+  g_dut_gw_network: 192.168.55.0
+  g_dut_gw_network_prefix: 192.168.55
+  g_dut_ip_mask: 255.255.255.0
+  g_dut_static_ipaddr: 172.18.19.200
+  g_dut_static_netmask: 255.255.255.0
+  g_dut_static_gateway: 172.18.19.2
+  g_dut_static_dns1: 172.18.19.1
+  g_dut_static_dns2: 172.18.19.100
+  g_dut_gw_dhcp_server_start_ip: 192.168.55.100
+  g_dut_gw_dhcp_server_end_ip: 192.168.55.249
+  g_dut_repeater_ssid: BU1_BAT_LAB
+  g_dut_repeater_ssid_pw: vagrantvagrant
+  g_dut_pppoe_username: test
+  g_dut_pppoe_password: test
+  g_dut_invalid_pppoe_username: testwrong
+  g_dut_invalid_pppoe_password: testwrong
+  g_lanhost_lease_file: /var/lib/dhcp/dhclient.leases
+  g_fw_folder: /home/vagrant/tmp_fw/

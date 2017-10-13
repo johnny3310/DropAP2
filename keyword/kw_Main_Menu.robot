@@ -1,6 +1,6 @@
 *** Settings ***
 Resource      libs/lib_index.robot
-Resource      var_Main_Menu.robot
+Resource      ../variable/var_Main_Menu.robot
 
 *** Keywords ***
 
@@ -9,8 +9,9 @@ Open Status Manu
    sleep   2s
 
 Open Newworking Wireless Page
-    Open Newworking Menu
-    Open Wireless Page
+    Wait Until Keyword Succeeds    10x    2s    click links    web    Networking  Wireless
+#    Open Newworking Menu
+#    Open Wireless Page
 
 Open Newworking Menu
     cpe click   web  ${Menu_Networking}

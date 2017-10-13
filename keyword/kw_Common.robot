@@ -1,6 +1,6 @@
 *** Settings ***
 Resource    libs/lib_index.robot
-Resource    var_Common.robot
+Resource    ../variable/var_Common.robot
 Resource    ./base.robot
 
 
@@ -13,6 +13,9 @@ Login Web GUI
 End Test
     Close Browser   web
 
+Wait Until Config Has Applied Completely
+    [Documentation]  Wait until config is applying animated sign has disapear
+        wait until element is not visible       web       ${Sign_Config_Is_Applying}    30s
 #Click Visible Element
 #    [Arguments]     ${browser}     ${locator}
 #    Wait Until Element Is Visible   ${locator}      10s
