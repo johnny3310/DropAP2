@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../base.robot
+Resource    base.robot
 
 *** Variables ***
 ${Button_Reboot} =    xpath=//*[@id="reboot-button"]

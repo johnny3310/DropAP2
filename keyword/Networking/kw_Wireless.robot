@@ -1,5 +1,5 @@
 *** Settings ***
-Resource      ../base.robot
+Resource      base.robot
 
 
 *** Variables ***
@@ -21,36 +21,51 @@ ${Previous_Guest_Network_SSID}=
 *** Keywords ***
 
 Set SSID Value
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]  ${ssid}
     input text    web    ${Input_SSID}    ${ssid}
     Save Wireless Config
 
 Set Hidden SSID Checkbox to Checked
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
      Check Checkbox     ${Checkbox_Hidden_SSID}
      Save Wireless Config
 
 Verify Hidden SSID Checkbox is Checked
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     Checkbox Should Be Selected     web     ${Checkbox_Hidden_SSID}
 
-Backup Previous Checkbox Hidden SSID State
+Backup Current Checkbox Hidden SSID State
+    [Documentation]
+    [Tags]  @AUTHOR=Johnny_Peng
     ${checkbox_state} =     run keyword and return status   Checkbox Should Be Selected     web     ${Checkbox_Hidden_SSID}
     Set Test Variable       ${Previous_Checkbox_Hidden_SSID_State}    ${checkbox_state}
 
 Restore To Previous Checkbox Hidden SSID State
     [Documentation]  Restore the checkbox state
+    [Tags]  @AUTHOR=Johnny_Peng
     Set Checkbox State     ${Checkbox_Hidden_SSID}      ${Previous_Checkbox_Hidden_SSID_State}
     Save Wireless Config
 Reset To Default Checkbox Hidden SSID State
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     Uncheck Checkbox     ${Checkbox_Hidden_SSID}
     Save Wireless Config
 
 Backup Previous SSID Value
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     ${element_value} =     Get Element Value     web      ${Input_SSID}
     Set Test Variable       ${Previous_SSID}    ${element_value}
 Restore To Previous SSID Value
     Set SSID Value       ${Previous_SSID}
 
 Should SSID Value Be Equal
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]  ${ssid}
     Wait Until Element Is Visible    web    ${Input_SSID}
     ${input_text}=     Get Element value    web     ${Input_SSID}
@@ -59,16 +74,21 @@ Should SSID Value Be Equal
 
 
 
-Backup Previous Security And Password State
+Backup Current Security And Password State
     [Documentation]  Backup Security List Value, if Security List Value is not Open, Backup Password Value
-    Backup Previous Security State
-    Backup Previous Password State
+    [Tags]   @AUTHOR=Johnny_Peng
+    Backup Current Security State
+    Backup Current Password State
 
-Backup Previous Security State
+Backup Current Security State
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     ${security_value}=   Wait Until Keyword Succeeds    5x    3s    get selected list label    web    ${Select_Security}
     Set Test Variable   ${Previous_Select_Security}     ${security_value}
 
-Backup Previous Password State
+Backup Current Password State
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     ${input_password_is_visible}=   Assert Element is visible     ${Input_Password}
     Run Keyword Unless      ${input_password_is_visible}==True
     ...                      Return From Keyword
@@ -77,17 +97,22 @@ Backup Previous Password State
     Set Test Variable   ${Previous_Input_Password}     ${password}
 
 Set Security And Password
-    [Documentation]  Write Security and Password Value, write password value when Security value is not "Open"
+    [Documentation]  Write Security and Password Value
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${security}     ${password}
     Set Security Value    ${security}
     Set Password    ${password}
     Save Wireless Config
 
 Set Security Value
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]       ${security}
     Select From List By Label    web    ${Select_Security}    ${security}
 
 Set Password
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${password}
     ${input_password_is_visible}=    Assert Element is visible   ${Input_Password}
     Run Keyword Unless      ${input_password_is_visible}==True
@@ -95,16 +120,22 @@ Set Password
     input text    web    ${Input_Password}    ${password}
 
 Verify Security And Password Were Set
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${security}    ${password}
     Verify Security was Set     ${security}
     Verify Password was Set     ${password}
 
 Verify Security was Set
-     [Arguments]     ${security}
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
+    [Arguments]     ${security}
      ${current_securiry_value}=    Wait Until Keyword Succeeds    5x    3s    get selected list label    web    ${Select_Security}
      should be equal   ${security}    ${current_securiry_value}
 
 Verify Password was Set
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]   ${password}
     ${input_password_is_visible}=    Assert Element is visible   ${Input_Password}
     Run Keyword Unless      ${input_password_is_visible}==True
@@ -113,40 +144,56 @@ Verify Password was Set
     should be equal   ${password}    ${current_password_value}
 
 Restore To Previous Security State
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     Set Security And Password   ${Previous_Select_Security}     ${Previous_Input_Password}
 
 
 #Guest Network
 
 Set Guest Network Radio State
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${radio_on_off}
     Select From List By Label    web    ${Select_Guest_Turn_On_Off}    ${radio_on_off}
     Save Wireless Config
 
 Guest Network Radio Should Be
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${radio_on_off}
     ${current_radio_is_on_off}=    Wait Until Keyword Succeeds    5x    3s    get selected list label    web    ${Select_Guest_Turn_On_Off}
     should be equal   ${radio_on_off}     ${current_radio_is_on_off}
 
 Backup Current Guest Network SSID
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
      ${element_value} =     Get Element Value     web      ${Input_Guest_SSID}
      Set Test Variable       ${Previous_Guest_Network_SSID}    ${element_value}
 
 Guest Network SSID Should Be
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${guest_network_ssid}
     ${current_guest_network_ssid_value}=      Get Element Value     web      ${Input_Guest_SSID}
     should be equal   ${guest_network_ssid}     ${current_guest_network_ssid_value}
 
 Restore Guest Network SSID
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     Set Guest Network SSID    ${previous_guest_network_ssid}
 
 Set Guest Network SSID
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${guest_network_ssid}
     input text    web    ${Input_Guest_SSID}    ${guest_network_ssid}
     Save Wireless Config
 #
 
 Save Wireless Config
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     cpe click       web    ${Button_SAVE}
     Wait Until Config Has Applied Completely
 

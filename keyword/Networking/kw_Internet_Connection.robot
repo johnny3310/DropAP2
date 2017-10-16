@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../base.robot
+Resource    base.robot
 
 *** Variables ***
 ${Select_Protocal} =    xpath=//*[@id="cbid.network.wan.proto"]

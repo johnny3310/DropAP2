@@ -1,5 +1,5 @@
 *** Settings ***
-Resource   ../base.robot
+Resource   base.robot
 
 
 Test Setup   Login Web GUI
@@ -23,16 +23,24 @@ tc_Wireless_Home Network_Security_And_Password
 
 *** Keywords ***
 Go To Wireless Home Network Page
+    [Documentation]    Go to target gui page
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Main_Menu.Open Newworking Wireless Page
 
 Set A New Security And Password Value
-    kw_Wireless.Backup Previous Security And Password State
+    [Documentation]    backup current state and set security and password value
+    [Tags]   @AUTHOR=Johnny_Peng
+    kw_Wireless.Backup Current Security And Password State
     kw_Wireless.Set Security And Password   WEP    qwert
 
 Verify Security State Was Modifed
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Verify Security And Password Were Set   WEP    qwert
 
 Restore To Previous State
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Restore To Previous Security State
 
 *** comment ***

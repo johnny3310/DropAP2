@@ -1,5 +1,5 @@
 *** Settings ***
-Resource   ../base.robot
+Resource   base.robot
 
 
 
@@ -25,16 +25,24 @@ tc_Wireless_Home Network_Hidden SSID
 
 *** Keywords ***
 Go to wireless home network page
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Main_Menu.Open Newworking Wireless Page
 
 Make Hidden SSID Check Box Checked
-#    kw_Wireless.Backup Previous Checkbox Hidden SSID State
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
+#    kw_Wireless.Backup Current Checkbox Hidden SSID State
     kw_Wireless.Set Hidden SSID Checkbox to Checked
 
 Verify Hidden SSID Check Box Is Checked
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Verify Hidden SSID Checkbox is Checked
 
 Restore To Previous State
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Reset To Default Checkbox Hidden SSID State
 
 *** comment ***

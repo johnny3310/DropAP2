@@ -1,5 +1,5 @@
 *** Settings ***
-Resource   ../base.robot
+Resource   base.robot
 
 
 
@@ -25,16 +25,24 @@ tc_Wireless_Guest Network_On_Off
 
 *** Keywords ***
 Go to wireless home network page
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Main_Menu.Open Newworking Wireless Page
 
 Modify Guest Network SSID
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Backup Current Guest Network SSID
     kw_Wireless.Set Guest Network SSID  TEST_GUEST_NETWORK_SSID
 
 Verify Guest Network SSID was set
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Guest Network SSID Should Be   TEST_GUEST_NETWORK_SSID
 
 Restore Guest Network SSID To Previous State
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Restore Guest Network SSID
 
 *** comment ***

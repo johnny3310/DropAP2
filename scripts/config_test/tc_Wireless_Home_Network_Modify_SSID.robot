@@ -1,5 +1,5 @@
 *** Settings ***
-Resource   ../base.robot
+Resource   base.robot
 
 
 
@@ -25,16 +25,24 @@ tc_Wireless_Home_Network_Modify_SSID
 
 *** Keywords ***
 Go to wireless home network page
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Main_Menu.Open Newworking Wireless Page
 
 Modify ssid
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Backup Previous SSID Value
     kw_Wireless.Set SSID Value      SSID_SET_TEST_1
 
 Verify ssid has been changed
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Should SSID Value Be Equal      SSID_SET_TEST_1
 
 Restore ssid to previous state
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Restore To Previous SSID Value
 
 *** comment ***

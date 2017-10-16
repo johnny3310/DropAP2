@@ -1,5 +1,5 @@
 *** Settings ***
-Resource   ../base.robot
+Resource   base.robot
 
 
 
@@ -26,13 +26,23 @@ tc_Wireless_Guest Network_On_Off
 
 *** Keywords ***
 Go to wireless home network page
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Main_Menu.Open Newworking Wireless Page
 
 Set Guest Network Raidio
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Set Guest Network Radio State   on
+
 Verify Guest NetWork Radio Was Set
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Guest Network Radio Should Be   on
+
 Restore Guest Network Radio To Default
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Set Guest Network Radio State   off
 
 *** comment ***

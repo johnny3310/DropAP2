@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../base.robot
+Resource    base.robot
 
 *** Variables ***
 ${Button_Check} =    xpath=//*[@id="btn-check"]
