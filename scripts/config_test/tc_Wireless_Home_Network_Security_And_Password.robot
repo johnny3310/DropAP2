@@ -1,12 +1,10 @@
 *** Settings ***
-Resource   ../../keyword/kw_Common.robot
-Resource   ../../keyword/kw_Main_Menu.robot
-Resource   ../../keyword/Networking/kw_Wireless.robot
+Resource   ../base.robot
 
 
-Test Setup   kw_Common.Login Web GUI
+Test Setup   Login Web GUI
 Test Teardown  Restore To Previous State
-Force Tags  @AUTHOR=Gemtek_Johnny_Peng
+Force Tags  @FEATURE=Web_GUI    @AUTHOR=Johnny_Peng
 
 *** Test Cases ***
 tc_Wireless_Home Network_Security_And_Password
@@ -16,12 +14,11 @@ tc_Wireless_Home Network_Security_And_Password
     ...    3. Verify Security and Password have set
 
 
-    [Tags]   config_test     modify_security
+    [Tags]   @TCID=WRTM-326ACN-177    @DUT=WRTM-326ACN     @AUTHOR=Johnny_Peng    config_test     config_wireless
     [Timeout]
     Go To Wireless Home Network Page
     Set A New Security And Password Value
     Verify Security State Was Modifed
-
 
 
 *** Keywords ***
@@ -33,9 +30,11 @@ Set A New Security And Password Value
     kw_Wireless.Set Security And Password   WEP    qwert
 
 Verify Security State Was Modifed
-    kw_Wireless.Verify Security And Password Were Set
+    kw_Wireless.Verify Security And Password Were Set   WEP    qwert
 
 Restore To Previous State
     kw_Wireless.Restore To Previous Security State
 
 *** comment ***
+2017-10-16     Johnny_Peng
+Init the script

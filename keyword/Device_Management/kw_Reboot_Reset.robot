@@ -1,7 +1,9 @@
 *** Settings ***
-Resource    ./base.robot
-Resource    var_Reboot_Reset.robot
-Resource    ../var_Front_Page.robot
+Resource    ../base.robot
+
+*** Variables ***
+${Button_Reboot} =    xpath=//*[@id="reboot-button"]
+${Button_Reset} =    xpath=//*[@id="maincontent"]/div/input[2]
 
 *** Keywords ***
 Click Reboot Button

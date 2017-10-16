@@ -1,13 +1,11 @@
 *** Settings ***
-Resource   ../../keyword/kw_Common.robot
-Resource   ../../keyword/kw_Main_Menu.robot
-Resource   ../../keyword/Networking/kw_Wireless.robot
+Resource   ../base.robot
 
 
 
-Test Setup   kw_Common.Login Web GUI
+Test Setup   Login Web GUI
 Test Teardown  Restore ssid to previous state
-Force Tags  @AUTHOR=Gemtek_Johnny_Peng
+Force Tags  @FEATURE=Web_GUI    @AUTHOR=Johnny_Peng
 
 *** Test Cases ***
 tc_Wireless_Home_Network_Modify_SSID
@@ -17,7 +15,7 @@ tc_Wireless_Home_Network_Modify_SSID
     ...    3. verify ssid has been changed
 
 
-    [Tags]   config_test     modify_ssid
+    [Tags]   @TCID=WRTM-326ACN-176    @DUT=WRTM-326ACN     @AUTHOR=Johnny_Peng    config_test     config_wireless
     [Timeout]
     Go to wireless home network page
     Modify ssid
@@ -40,3 +38,5 @@ Restore ssid to previous state
     kw_Wireless.Restore To Previous SSID Value
 
 *** comment ***
+2017-10-16     Johnny_Peng
+Init the script

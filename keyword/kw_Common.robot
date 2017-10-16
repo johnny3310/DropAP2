@@ -1,9 +1,9 @@
 *** Settings ***
-Resource    libs/lib_index.robot
-Resource    ../variable/var_Common.robot
 Resource    ./base.robot
 
-
+*** Variables ***
+${Loading_Block} =      css=div[class="Loading"]
+${Sign_Config_Is_Applying}=    css=imag[alt="Loading"]
 
 *** Keywords ***
 
@@ -33,6 +33,9 @@ Set Checkbox State
     #if checkbox state is not equal, then click check box
     run keyword Unless      ${checkbox_state}==${set_checkbox_state}      cpe click     web   ${checkbox_locator}
 
+Assert Element is visible
+    [Arguments]     ${locator}
+    [Return]    run keyword and return status   element should be visible   web    ${locator}
 Assert Checkbox is checked
      [Arguments]  ${checkbox_locator}
      ${checkbox_state} =     run keyword and return status   Checkbox Should Be Selected    web     ${checkbox_locator}

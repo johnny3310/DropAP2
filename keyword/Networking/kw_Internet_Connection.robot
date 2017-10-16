@@ -1,6 +1,9 @@
 *** Settings ***
-Resource    ./base.robot
-Resource    var_Internet_Connection.robot
+Resource    ../base.robot
+
+*** Variables ***
+${Select_Protocal} =    xpath=//*[@id="cbid.network.wan.proto"]
+${Button_Save} =    xpath=//*[@id="maincontent"]/div/form/div[3]/input[1]
 
 *** Keywords ***
 Config DHCP Client
