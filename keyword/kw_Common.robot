@@ -3,7 +3,9 @@ Resource    ./base.robot
 
 *** Variables ***
 ${Loading_Block} =      css=div[class="Loading"]
-${Sign_Config_Is_Applying}=    css=imag[alt="Loading"]
+${Sign_Config_Is_Applying}=    css=img[alt="Loading"]
+${DropAP_Setup} =      xpath=//*[@id="btn-setup"]
+${DropAP_Ok} =      xpath=//*[@id="btn-ok"]
 
 *** Keywords ***
 
@@ -19,8 +21,9 @@ End Test
 
 Wait Until Config Has Applied Completely
     [Documentation]  Wait until config is applying animated sign has disapear
-    wait until element is not visible       web       ${Sign_Config_Is_Applying}    30s
-
+    [Tags]   @AUTHOR=Johnny_Peng
+    Wait Until Keyword Succeeds     30x      1s      Element Should Not Be Visible    web    ${Sign_Config_Is_Applying}
+    sleep   1s
 
 Check Checkbox
     [Documentation]
@@ -55,5 +58,19 @@ Assert Checkbox is checked
     ${checkbox_state} =     run keyword and return status   Checkbox Should Be Selected    web     ${checkbox_locator}
     [Return]  ${checkbox_state}
 
+Config Setup DropAP
+    Wait Until Keyword Succeeds    10x    2s    cpe click    web    ${DropAP_Setup}
+    Wait Until Keyword Succeeds    10x    10s    cpe click    web    ${DropAP_OK}
+    Wait Until Keyword Succeeds    10x    10s    cpe click    web    ${DropAP_OK}
+    page should contain text    web    Status
+    sleep   1s
 
+*** comment ***
+2017-10-18  Hans_SUn
+Add Config Setup DropAP keyword
+2017-10-17  Johnny_Peng
+Fix Keyword Function:Wait Until Config Has Applied Completely
+    Cannot distinguish Configuration is applied properly
+2017-10-16     Johnny_Peng
+Init the script
 

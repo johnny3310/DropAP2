@@ -30,7 +30,7 @@ Set SSID Value
 Set Hidden SSID Checkbox to Checked
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
-     Check Checkbox     ${Checkbox_Hidden_SSID}
+     kw_Common.Check Checkbox     ${Checkbox_Hidden_SSID}
      Save Wireless Config
 
 Verify Hidden SSID Checkbox is Checked
@@ -49,10 +49,11 @@ Restore To Previous Checkbox Hidden SSID State
     [Tags]  @AUTHOR=Johnny_Peng
     Set Checkbox State     ${Checkbox_Hidden_SSID}      ${Previous_Checkbox_Hidden_SSID_State}
     Save Wireless Config
+
 Reset To Default Checkbox Hidden SSID State
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
-    Uncheck Checkbox     ${Checkbox_Hidden_SSID}
+    kw_Common.Uncheck Checkbox     ${Checkbox_Hidden_SSID}
     Save Wireless Config
 
 Backup Previous SSID Value
@@ -60,18 +61,17 @@ Backup Previous SSID Value
     [Tags]   @AUTHOR=Johnny_Peng
     ${element_value} =     Get Element Value     web      ${Input_SSID}
     Set Test Variable       ${Previous_SSID}    ${element_value}
+
 Restore To Previous SSID Value
     Set SSID Value       ${Previous_SSID}
 
-Should SSID Value Be Equal
+Verify SSID Value Is
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]  ${ssid}
     Wait Until Element Is Visible    web    ${Input_SSID}
     ${input_text}=     Get Element value    web     ${Input_SSID}
     should be equal   ${ssid}    ${input_text}
-
-
 
 
 Backup Current Security And Password State
@@ -123,17 +123,17 @@ Verify Security And Password Were Set
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${security}    ${password}
-    Verify Security was Set     ${security}
-    Verify Password was Set     ${password}
+    Security Should be     ${security}
+    Password Should be     ${password}
 
-Verify Security was Set
+Security Should be
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${security}
-     ${current_securiry_value}=    Wait Until Keyword Succeeds    5x    3s    get selected list label    web    ${Select_Security}
-     should be equal   ${security}    ${current_securiry_value}
+    ${current_securiry_value}=    Wait Until Keyword Succeeds    5x    3s    get selected list label    web    ${Select_Security}
+    should be equal   ${security}    ${current_securiry_value}
 
-Verify Password was Set
+Password Should be
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]   ${password}
@@ -151,6 +151,7 @@ Restore To Previous Security State
 
 #Guest Network
 
+
 Set Guest Network Radio State
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
@@ -158,7 +159,7 @@ Set Guest Network Radio State
     Select From List By Label    web    ${Select_Guest_Turn_On_Off}    ${radio_on_off}
     Save Wireless Config
 
-Guest Network Radio Should Be
+Verify Guest Network Radio Is
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${radio_on_off}
@@ -171,7 +172,7 @@ Backup Current Guest Network SSID
      ${element_value} =     Get Element Value     web      ${Input_Guest_SSID}
      Set Test Variable       ${Previous_Guest_Network_SSID}    ${element_value}
 
-Guest Network SSID Should Be
+Verify Guest Network SSID Is
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${guest_network_ssid}
@@ -182,6 +183,15 @@ Restore Guest Network SSID
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     Set Guest Network SSID    ${previous_guest_network_ssid}
+
+
+Turn On Guest Network and Set Guest Network SSID
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
+    [Arguments]     ${guest_network_ssid}
+    Select From List By Label    web    ${Select_Guest_Turn_On_Off}    on
+    input text    web    ${Input_Guest_SSID}    ${guest_network_ssid}
+    Save Wireless Config
 
 Set Guest Network SSID
     [Documentation]
@@ -195,6 +205,6 @@ Save Wireless Config
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     cpe click       web    ${Button_SAVE}
-    Wait Until Config Has Applied Completely
+    kw_Common.Wait Until Config Has Applied Completely
 
 

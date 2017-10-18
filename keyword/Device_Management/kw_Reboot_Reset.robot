@@ -6,7 +6,7 @@ ${Button_Reboot} =    xpath=//*[@id="reboot-button"]
 ${Button_Reset} =    xpath=//*[@id="maincontent"]/div/input[2]
 
 *** Keywords ***
-Click Reboot Button
+Click Reboot Button And Verify Function Is Work
     [Arguments]
     [Documentation]    Click Reboot Button
     [Tags]    @AUTHOR=Gemtek_Hans_Sun
@@ -14,7 +14,7 @@ Click Reboot Button
     Wait Until Keyword Succeeds    10x    2s    cpe click    web    ${Button_Reboot}
     Wait Until Element Is Visible    web    ${Link_Configure_DropAP}    timeout=120
 
-Click Reset Button
+Click Reset Button And Verify Function Is Work
     [Arguments]
     [Documentation]    Click Reset Button
     [Tags]    @AUTHOR=Gemtek_Hans_Sun
