@@ -2,6 +2,8 @@
 Library           RequestsLibrary
 Library           Collections
 
+Force Tags    @FEATURE=CLOUD_API    @AUTHOR=Jill_Chou
+
 *** Variables ***
 ${domainName}      https://s5-dropap.securepilot.com
 ${deviceid}     701a05010003
@@ -18,8 +20,8 @@ ${userId}   700009637
 
 
 *** Test Cases ***
-Login and Get Info (S5)-Device
-    [Tags]    get
+Login_and_Get_Info_Device
+    [Tags]    get    @FEATURE=CLOUD_API    @AUTHOR=Jennie_Chang
     ${auth}=    Create list    701a05010002    4u9kpm2h
     ${apiKey}=    Create list    DropAP-GFFnDFe4WM
     ${domainName}=    Set Variable    https://s5.securepilot.com
@@ -60,8 +62,8 @@ Login and Get Info (S5)-Device
     Should Be Equal As Strings    ${resp3.json()['status']['code']}    1221
     Delete All Sessions
 
-Bind /unbind user
-    [Tags]    Bind /unbind user
+Bind_and_unbind_user
+    [Tags]    Bind /unbind user    @FEATURE=CLOUD_API    @AUTHOR=Jill_Chou
     ${auth}=    Create List    ${deviceid}    ${devicepw}
     Create Digest Session    S5    ${domainName}    auth=${auth}    debug=3
     ${resp1}=    Get Request    S5    /v1/device/login
@@ -134,8 +136,8 @@ Bind /unbind user
     Should Be Equal As Strings    ${resp.json()['status']['code']}      1240
     Delete All Sessions
 
-device resrt default
-    [Tags]    Bind /unbind user
+device_reset_default
+    [Tags]    Bind /unbind user    @FEATURE=CLOUD_API    @AUTHOR=Jill_Chou
     ${auth}=    Create List    ${deviceid}    ${devicepw}
     Create Digest Session    S5    ${domainName}    auth=${auth}    debug=3
     ${resp1}=    Get Request    S5    /v1/device/login

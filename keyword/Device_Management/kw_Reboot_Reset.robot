@@ -12,7 +12,10 @@ Click Reboot Button And Verify Function Is Work
     [Tags]    @AUTHOR=Gemtek_Hans_Sun
     Wait Until Keyword Succeeds    10x    2s    click links    web    Device Management  Reboot/Reset
     Wait Until Keyword Succeeds    10x    2s    cpe click    web    ${Button_Reboot}
-    Wait Until Element Is Visible    web    ${Link_Configure_DropAP}    timeout=120
+    ${r}  run keyword and return status    Wait Until Element Is Visible    web    ${Link_Configure_DropAP}    timeout=120
+    run keyword if  '${r}'=='False'    run keywords    Reload Page    web
+    ...    AND    sleep    1
+    ...    AND    Wait Until Element Is Visible    web    ${Link_Configure_DropAP}
 
 Click Reset Button And Verify Function Is Work
     [Arguments]
@@ -23,4 +26,4 @@ Click Reset Button And Verify Function Is Work
     ${r}  run keyword and return status    Wait Until Element Is Visible    web    ${Link_Setup_DropAP}    timeout=120
     run keyword if  '${r}'=='False'    run keywords    Reload Page    web
     ...    AND    sleep    1
-    ...    AND    Element Should Be Visible    web    ${Link_Setup_DropAP}
+    ...    AND    Wait Until Element Is Visible    web    ${Link_Setup_DropAP}

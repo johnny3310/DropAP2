@@ -30,7 +30,7 @@ Set SSID Value
 Set Hidden SSID Checkbox to Checked
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
-     kw_Common.Check Checkbox     ${Checkbox_Hidden_SSID}
+     Select Checkbox    web    ${Checkbox_Hidden_SSID}
      Save Wireless Config
 
 Verify Hidden SSID Checkbox is Checked
@@ -47,13 +47,13 @@ Backup Current Checkbox Hidden SSID State
 Restore To Previous Checkbox Hidden SSID State
     [Documentation]  Restore the checkbox state
     [Tags]  @AUTHOR=Johnny_Peng
-    Set Checkbox State     ${Checkbox_Hidden_SSID}      ${Previous_Checkbox_Hidden_SSID_State}
+    kw_Common.Set Checkbox State     ${Checkbox_Hidden_SSID}      ${Previous_Checkbox_Hidden_SSID_State}
     Save Wireless Config
 
 Reset To Default Checkbox Hidden SSID State
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
-    kw_Common.Uncheck Checkbox     ${Checkbox_Hidden_SSID}
+    Unselect checkbox       web     ${Checkbox_Hidden_SSID}
     Save Wireless Config
 
 Backup Previous SSID Value
@@ -65,7 +65,7 @@ Backup Previous SSID Value
 Restore To Previous SSID Value
     Set SSID Value       ${Previous_SSID}
 
-Verify SSID Value Is
+Verify SSID Value
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]  ${ssid}
@@ -80,16 +80,22 @@ Backup Current Security And Password State
     Backup Current Security State
     Backup Current Password State
 
+Get Security Value
+    [Documentation]
+    [Tags]  @AUTHOR=Johnny_Peng
+    ${security_value}=   Wait Until Keyword Succeeds    5x    3s    get selected list label    web    ${Select_Security}
+    [Return]    ${security_value}
+
 Backup Current Security State
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
-    ${security_value}=   Wait Until Keyword Succeeds    5x    3s    get selected list label    web    ${Select_Security}
+    ${security_value}=   Get Security Value
     Set Test Variable   ${Previous_Select_Security}     ${security_value}
 
 Backup Current Password State
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
-    ${input_password_is_visible}=   Assert Element is visible     ${Input_Password}
+    ${input_password_is_visible}=   Assert Password Input Is Visible
     Run Keyword Unless      ${input_password_is_visible}==True
     ...                      Return From Keyword
 
@@ -114,7 +120,7 @@ Set Password
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${password}
-    ${input_password_is_visible}=    Assert Element is visible   ${Input_Password}
+    ${input_password_is_visible}=    Assert Password Input Is Visible
     Run Keyword Unless      ${input_password_is_visible}==True
         ...                      Return From Keyword
     input text    web    ${Input_Password}    ${password}
@@ -123,21 +129,21 @@ Verify Security And Password Were Set
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${security}    ${password}
-    Security Should be     ${security}
-    Password Should be     ${password}
+    Assert Security Value     ${security}
+    Assert Password Value     ${password}
 
-Security Should be
+Assert Security Value
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${security}
-    ${current_securiry_value}=    Wait Until Keyword Succeeds    5x    3s    get selected list label    web    ${Select_Security}
+    ${current_securiry_value}=    Get Security Value
     should be equal   ${security}    ${current_securiry_value}
 
-Password Should be
+Assert Password Value
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]   ${password}
-    ${input_password_is_visible}=    Assert Element is visible   ${Input_Password}
+    ${input_password_is_visible}=    Assert Password Input Is Visible
     Run Keyword Unless      ${input_password_is_visible}==True
     ...                      Return From Keyword
     ${current_password_value}=      Get Element Value     web      ${Input_Password}
@@ -159,7 +165,7 @@ Set Guest Network Radio State
     Select From List By Label    web    ${Select_Guest_Turn_On_Off}    ${radio_on_off}
     Save Wireless Config
 
-Verify Guest Network Radio Is
+Verify Guest Network Radio Is on or off
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${radio_on_off}
@@ -172,7 +178,7 @@ Backup Current Guest Network SSID
      ${element_value} =     Get Element Value     web      ${Input_Guest_SSID}
      Set Test Variable       ${Previous_Guest_Network_SSID}    ${element_value}
 
-Verify Guest Network SSID Is
+Verify Guest Network SSID Value
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${guest_network_ssid}
@@ -192,6 +198,13 @@ Turn On Guest Network and Set Guest Network SSID
     Select From List By Label    web    ${Select_Guest_Turn_On_Off}    on
     input text    web    ${Input_Guest_SSID}    ${guest_network_ssid}
     Save Wireless Config
+
+Assert Password Input Is Visible
+    [Documentation]
+    [Tags]   @AUTHOR=Johnny_Peng
+    ${security_value}=      Get Security Value
+    ${is_visible}=  run keyword and return status   should not be equal     ${security_value}       Open
+    [Return]    ${is_visible}
 
 Set Guest Network SSID
     [Documentation]

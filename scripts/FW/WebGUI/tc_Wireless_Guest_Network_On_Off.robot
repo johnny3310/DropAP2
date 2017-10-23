@@ -12,33 +12,34 @@ Force Tags    @FEATURE=Web_GUI    @AUTHOR=Johnny_Peng
 *** Test Cases ***
 tc_Wireless_Guest Network_On_Off
     [Documentation]   tc_Wireless_Home Network_Hidden SSID
-    ...    1. Go to wireless home network page
-    ...    2. Set Guest Network Radio
-    ...    3. Verify Guest Network Radio was set
+    ...    1. Go to Networking/Wireless_Guest Network page
+    ...    2. Select Guest Network is selected on
+    ...    3. Refresh page and verify guest network is selected on.
 
 
     [Tags]   @TCID=WRTM-326ACN-179    @DUT=WRTM-326ACN     @AUTHOR=Johnny_Peng     config_test     config_wireless
     [Timeout]
-    Go To Wireless Home Network Page
-    Set Guest NetWork Raidio
-    Verify Guest NetWork Radio Was Set
+    Go to Networking/Wireless_Guest Network page
+    Select Guest Network is selected on
+    Refresh page and verify guest network is selected on
 
 
 *** Keywords ***
-Go to wireless home network page
+Go to Networking/Wireless_Guest Network page
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     kw_Main_Menu.Open Newworking Wireless Page
 
-Set Guest Network Raidio
+Select Guest Network is selected on
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Set Guest Network Radio State   on
 
-Verify Guest NetWork Radio Was Set
+Refresh page and verify guest network is selected on
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
-    kw_Wireless.Guest Network Radio Should Be   on
+    kw_Main_Menu.Refresh Networking Wireless Page
+    kw_Wireless.Verify Guest Network Radio Is on or off   on
 
 Restore Guest Network Radio To Default
     [Documentation]

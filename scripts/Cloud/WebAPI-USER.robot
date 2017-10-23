@@ -2,6 +2,7 @@
 Library           Collections
 Library           RequestsLibrary
 
+Force Tags    @FEATURE=CLOUD_API    @AUTHOR=Jill_Chou
 
 *** Variables ***
 ${domainName}      https://s5-dropap.securepilot.com
@@ -15,8 +16,8 @@ ${deviceInfoNew}    {"name": "My Device test"}
 ${pin}      18833648
 
 *** Test Cases ***
-Login and Get Info (S5)-User
-    [Tags]    get
+Login_and_Get_Info_User
+    [Tags]    get    @FEATURE=CLOUD_API    @AUTHOR=Jennie_Chang
     ${auth}=    Create list    jennie    12345678
     ${apiKey}=    Create list    DropAP-GFFnDFe4WM
     ${domainName}=    Set Variable    https://s5-dropap.securepilot.com
@@ -54,8 +55,8 @@ Login and Get Info (S5)-User
     Log    ${resp2.json()}
     Should Be Equal As Strings    ${resp3.json()['status']['code']}    1211
 
-Update user information(S5)
-    [Tags]    get
+Update_user_information
+    [Tags]    get    @FEATURE=CLOUD_API    @AUTHOR=Jennie_Chang
     ${auth}=    Create list    jennie    12345678
     ${auth_change}=    Create list    12345678
     ${apiKey}=    Create list    DropAP-GFFnDFe4WM
@@ -111,7 +112,9 @@ Update user information(S5)
     Should Be Equal As Strings    ${resp1.json()['status']['code']}    1211
     Delete All Sessions
 
-change password
+Change_password
+    [Tags]    get    @FEATURE=CLOUD_API    @AUTHOR=Jennie_Chang
+
     ${Old_auth}=    Create list    jennie    12345678
     ${New_auth}=    Create list    jennie    12345678AA
     ${apiKey}=    Create list    DropAP-GFFnDFe4WM
@@ -144,8 +147,8 @@ change password
     Delete All Sessions
 
 
-Bind/unbind device and edit info
-    [Tags]    Bind/unbind device and edit info
+Bind_and_unbind_device_and_edit_info
+    [Tags]    Bind/unbind device and edit info    @FEATURE=CLOUD_API    @AUTHOR=Jill_Chou
     ${auth}=    Create List    jill_test    12345678
     Create Digest Session    S5    ${domainName}    auth=${auth}    debug=3
     ${resp1}=    Get Request    S5    /v1/user/login

@@ -34,7 +34,7 @@ Refresh page and verify SSID is changed accordingly
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     kw_Main_Menu.Refresh Networking Wireless Page
-    kw_Wireless.Verify SSID Value Is      SSID_SET_TEST_1
+    kw_Wireless.Verify SSID Value    SSID_SET_TEST_1
 
 Restore ssid to previous state
     [Documentation]

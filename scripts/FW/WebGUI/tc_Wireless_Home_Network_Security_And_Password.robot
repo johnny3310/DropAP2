@@ -9,33 +9,34 @@ Force Tags  @FEATURE=Web_GUI    @AUTHOR=Johnny_Peng
 *** Test Cases ***
 tc_Wireless_Home Network_Security_And_Password
     [Documentation]   tc_Wireless_Home Network_Security_And_Password
-    ...    1. Go to wireless home network page
-    ...    2. Set a new Security and Password Value
-    ...    3. Verify Security and Password have set
+    ...    1. Go to Networking/Wireless Page
+    ...    2. Change 2.4g wifi and 5g wifi Security/Password and save setting
+    ...    3. Refresh page and verify Security/Password is changed accordingly.
 
 
     [Tags]   @TCID=WRTM-326ACN-177    @DUT=WRTM-326ACN     @AUTHOR=Johnny_Peng    config_test     config_wireless
     [Timeout]
-    Go To Wireless Home Network Page
-    Set A New Security And Password Value
-    Verify Security State Was Modifed
+    Go to Networking/Wireless Page
+    Change 2.4g wifi and 5g wifi Security/Password and save setting
+    Refresh Page and verify Security/Password is changed accordingly
 
 
 *** Keywords ***
-Go To Wireless Home Network Page
+Go to Networking/Wireless Page
     [Documentation]    Go to target gui page
     [Tags]   @AUTHOR=Johnny_Peng
     kw_Main_Menu.Open Newworking Wireless Page
 
-Set A New Security And Password Value
+Change 2.4g wifi and 5g wifi Security/Password and save setting
     [Documentation]    backup current state and set security and password value
     [Tags]   @AUTHOR=Johnny_Peng
     kw_Wireless.Backup Current Security And Password State
     kw_Wireless.Set Security And Password   WEP    qwert
 
-Verify Security State Was Modifed
+Refresh Page and verify Security/Password is changed accordingly
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
+    kw_Main_Menu.Refresh Networking Wireless Page
     kw_Wireless.Verify Security And Password Were Set   WEP    qwert
 
 Restore To Previous State

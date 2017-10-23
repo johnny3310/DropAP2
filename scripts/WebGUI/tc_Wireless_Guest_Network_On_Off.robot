@@ -39,7 +39,7 @@ Refresh page and verify guest network is selected on
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     kw_Main_Menu.Refresh Networking Wireless Page
-    kw_Wireless.Verify Guest Network Radio Is   on
+    kw_Wireless.Verify Guest Network Radio Is on or off   on
 
 Restore Guest Network Radio To Default
     [Documentation]

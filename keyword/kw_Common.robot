@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ./base.robot
+Resource    base.robot
 
 *** Variables ***
 ${Loading_Block} =      css=div[class="Loading"]
@@ -22,20 +22,11 @@ End Test
 Wait Until Config Has Applied Completely
     [Documentation]  Wait until config is applying animated sign has disapear
     [Tags]   @AUTHOR=Johnny_Peng
-    Wait Until Keyword Succeeds     30x      1s      Element Should Not Be Visible    web    ${Sign_Config_Is_Applying}
+#    Wait Until Keyword Succeeds     30x      2s      Element Should Not Be Visible    web    ${Sign_Config_Is_Applying}
+    Wait until element is not visible    web    ${Sign_Config_Is_Applying}
     sleep   1s
 
-Check Checkbox
-    [Documentation]
-    [Tags]   @AUTHOR=Johnny_Peng
-    [Arguments]  ${checkbox_locator}
-    Set Checkbox State  ${checkbox_locator}     True
 
-Uncheck Checkbox
-    [Documentation]
-    [Tags]   @AUTHOR=Johnny_Peng
-    [Arguments]  ${checkbox_locator}
-    Set Checkbox State  ${checkbox_locator}     False
 
 Set Checkbox State
     [Documentation]     If current state is not equal to assigned state, click checkbox once to make it consist to assigned state
@@ -49,7 +40,8 @@ Assert Element is visible
     [Documentation]
     [Tags]   @AUTHOR=Johnny_Peng
     [Arguments]     ${locator}
-    [Return]    run keyword and return status   element should be visible   web    ${locator}
+    ${is_visible}=    run keyword and return status   element should be visible   web    ${locator}
+    [Return]  ${is_visible}
 
 Assert Checkbox is checked
     [Documentation]

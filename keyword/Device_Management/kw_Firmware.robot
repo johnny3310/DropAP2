@@ -11,4 +11,6 @@ Click Firmware Check Button
     [Tags]    @AUTHOR=Hans_Sun
     Wait Until Keyword Succeeds    10x    2s    click links    web    Device Management  Firmware
     Wait Until Keyword Succeeds    10x    2s    cpe click    web    ${Button_Check}
+    sleep    1s
+
 

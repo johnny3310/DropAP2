@@ -1,5 +1,5 @@
 *** Settings ***
-Resource          ../base.robot
+Resource          base.robot
 
 *** Keywords ***
 P800_suite_setup
@@ -91,9 +91,10 @@ login ont should fail
 cpe click
     [Documentation]  Click visible element and wait the action finished, ${wait_time} is timeout value for finding element
     [Arguments]    ${browser}    ${locator}    ${search_time}=1.5    ${wait_time}=30
+    wait_until_element_is_visible     ${browser}    ${locator}
     click visible element    ${browser}    ${locator}
     #run keyword and ignore error  wait action finish    ${browser}    id=darkenScreenObject    ${search_time}    ${wait_time}
-    run keyword and ignore error  wait action finish    ${browser}    class=loading   ${search_time}    ${wait_time}
+    run keyword and ignore error  wait action finish    ${browser}    css=div[class="loading"]   ${search_time}    ${wait_time}
 
 wait action finish
     [Documentation]  Wait action finish by checking element which id is darkenScreenObject is not displayed
